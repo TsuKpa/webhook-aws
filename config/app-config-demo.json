@@ -1,0 +1,21 @@
+{
+    "Project": {
+        "Name": "EcsProject",
+        "Stage": "Demo",
+        "Account": "75157*******",
+        "Region": "ap-southeast-1",
+        "Profile": "cdk-demo"
+    },
+    "Stack": {
+        "WebhookECS": {
+            "Name": "VpcInfraStack",
+            "VPCName": "CommonVPC",
+            "VPCMaxAzs": 3,
+            "VPCCIDR": "10.0.0.0/16",
+            "NATGatewayCount": 0,
+            "ECSClusterName": "MainCluster",
+            "TaskDefinitions": {
+            }
+        }
+    }
+}
