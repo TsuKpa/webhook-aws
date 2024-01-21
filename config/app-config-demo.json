@@ -15,7 +15,13 @@
             "NATGatewayCount": 0,
             "ECSClusterName": "MainCluster",
             "TaskDefinitions": {
-            }
+            },
+            "RepositoriesName": ["service-a", "service-b"],
+            "rds": {
+                "username": "root",
+                "password": "root"
+            },
+            "logGroupNames": ["ecs/service-a", "ecs/service-b"]
         }
     }
 }
