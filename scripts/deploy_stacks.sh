@@ -4,9 +4,9 @@
 APP_CONFIG=$1
 export APP_CONFIG=$APP_CONFIG
 
-PROJECT_NAME=$(cat $APP_CONFIG | jq -r '.Project.Name') #ex> IoTData
-PROJECT_STAGE=$(cat $APP_CONFIG | jq -r '.Project.Stage') #ex> Dev
-PROFILE_NAME=$(cat $APP_CONFIG | jq -r '.Project.Profile') #ex> cdk-demo
+PROJECT_NAME=$(cat $APP_CONFIG | jq -r '.project.name') #ex> ECS
+PROJECT_STAGE=$(cat $APP_CONFIG | jq -r '.project.stage') #ex> Dev
+PROFILE_NAME=$(cat $APP_CONFIG | jq -r '.project.profile') #ex> demo
 
 echo ==--------ConfigInfo---------==
 echo $APP_CONFIG
@@ -16,7 +16,7 @@ echo .
 
 echo ==--------SetAwsProfileEnv---------==
 if [ -z "$PROFILE_NAME" ]; then
-    echo "Project.Profile is empty, default AWS Profile is used"
+    echo "project.profile is empty, default AWS Profile is used"
 else
     if [ -z "$ON_PIPELINE" ]; then
         echo "$PROFILE_NAME AWS Profile is used"
@@ -41,7 +41,7 @@ cdk-local list
 echo .
 echo .
 
-echo ==--------DeployStacksStepByStep---------==
-cdk-local deploy *-VpcInfraStack --require-approval never
+echo ==--------DeployStacks---------==
+cdk-local deploy *-webhookECS --require-approval never
 echo .
 echo .

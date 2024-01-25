@@ -3,7 +3,7 @@
 # Configuration File Path
 APP_CONFIG=$1
 
-PROFILE_NAME=$(cat $APP_CONFIG | jq -r '.Project.Profile') #ex> cdk-demo
+PROFILE_NAME=$(cat $APP_CONFIG | jq -r '.project.profile') #ex> demo
 
 echo ==--------ConfigInfo---------==
 echo $APP_CONFIG
@@ -13,7 +13,7 @@ echo .
 
 echo ==--------SetAwsProfileEnv---------==
 if [ -z "$PROFILE_NAME" ]; then
-    echo "Project.Profile is empty, default AWS Profile is used"
+    echo "project.profile is empty, default AWS Profile is used"
 else
     if [ -z "$ON_PIPELINE" ]; then
         echo "$PROFILE_NAME AWS Profile is used"
@@ -38,7 +38,7 @@ cdk-local list
 echo .
 echo .
 
-echo ==--------DestroyStacksStepByStep---------==
-cdk-local destroy *-VpcInfraStack --force
+echo ==--------DestroyStacks---------==
+cdk-local destroy *-webhookECS --force
 echo .
 echo .

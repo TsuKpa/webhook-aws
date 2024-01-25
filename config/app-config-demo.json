@@ -1,27 +1,87 @@
 {
-    "Project": {
-        "Name": "EcsProject",
-        "Stage": "Demo",
-        "Account": "75157*******",
-        "Region": "ap-southeast-1",
-        "Profile": "cdk-demo"
+    "project": {
+        "name": "WebhookECS",
+        "stage": "Dev",
+        "account": "75157*******",
+        "region": "ap-southeast-1",
+        "profile": "demo"
     },
-    "Stack": {
-        "WebhookECS": {
-            "Name": "VpcInfraStack",
-            "VPCName": "CommonVPC",
-            "VPCMaxAzs": 3,
-            "VPCCIDR": "10.0.0.0/16",
-            "NATGatewayCount": 0,
-            "ECSClusterName": "MainCluster",
-            "TaskDefinitions": {
+    "stacks": {
+        "webhookECS": {
+            "name": "webhookECS",
+            "description": "webhookECS description",
+            "vpc": {
+                "name": "WebhookVPC",
+                "maxAZs": 3,
+                "cidr": "10.0.0.0/16",
+                "natGatewayCount": 0,
+                "subnetConfiguration": [
+                    {
+                        "cidrMask": 24,
+                        "name": "PublicSubnet",
+                        "subnetType": "Public"
+                    },
+                    {
+                        "cidrMask": 24,
+                        "name": "PrivateSubnet'",
+                        "subnetType": "Private"
+                    }
+                ]
             },
-            "RepositoriesName": ["service-a", "service-b"],
+            "elasticCache": {
+                "name": "redis-cluster",
+                "engine": "redis",
+                "cacheNodeType": "cache.t2.micro",
+                "numCacheNodes": 1
+            },
             "rds": {
-                "username": "root",
-                "password": "root"
+                "name": "webhookDB",
+                "engine": "POSTGRES",
+                "allocatedStorage": 20,
+                "credentials": {
+                    "username": "root",
+                    "password": "root123456"
+                }
             },
-            "logGroupNames": ["ecs/service-a", "ecs/service-b"]
+            "ecr": {
+                "repositoriesName": ["service-a", "service-b"]
+            },
+            "ecs": {
+                "clusterName": "",
+                "services": [
+                    {
+                        "name": "",
+                        "taskDefinitions": {}
+                    }
+                ]
+            },
+            "ssmParameter": {
+                "redis": {
+                    "host": {
+                        "name": "REDIS_HOST",
+                        "value": ""
+                    },
+                    "maxJob": {
+                        "name": "REDIS_MAX_JOB",
+                        "value": 100
+                    },
+                    "maxJobDuration": {
+                        "name": "REDIS_MAX_JOB_DURATION",
+                        "value": 2000
+                    }
+                },
+                "rds": {
+                    "host": {
+                        "name": "DB_HOST",
+                        "value": ""
+                    },
+                    "databaseUrl": ""
+                }
+            },
+            "logs": {
+                "logGroupNames": ["/ecs/service-a", "/ecs/service-b"],
+                "retention": ""
+            }
         }
     }
 }
