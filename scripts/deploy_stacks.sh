@@ -42,6 +42,6 @@ echo .
 echo .
 
 echo ==--------DeployStacks---------==
-cdk-local deploy *-webhookECS --require-approval never
+cdk-local deploy *webhookECS --require-approval never
 echo .
 echo .

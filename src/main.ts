@@ -8,7 +8,7 @@ try {
         appConfigFileKey: 'APP_CONFIG',
     });
 
-    new WebhookECS(appContext, appContext.appConfig.Stack.VpcInfra);
+    new WebhookECS(appContext, appContext.appConfig.stacks);
 } catch (error) {
     if (error instanceof AppContextError) {
         console.error('[AppContextError]:', error.message);

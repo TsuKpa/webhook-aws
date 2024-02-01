@@ -2,6 +2,7 @@
 
 # Configuration File Path
 APP_CONFIG=$1
+export APP_CONFIG=$APP_CONFIG
 
 PROFILE_NAME=$(cat $APP_CONFIG | jq -r '.project.profile') #ex> demo
 
@@ -39,6 +40,6 @@ echo .
 echo .
 
 echo ==--------DestroyStacks---------==
-cdk-local destroy *-webhookECS --force
+cdk-local destroy *webhookECS --force
 echo .
 echo .

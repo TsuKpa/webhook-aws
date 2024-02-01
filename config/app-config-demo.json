@@ -2,9 +2,9 @@
     "project": {
         "name": "WebhookECS",
         "stage": "Dev",
-        "account": "75157*******",
+        "account": "419040915749",
         "region": "ap-southeast-1",
-        "profile": "demo"
+        "profile": "tsukpa"
     },
     "stacks": {
         "webhookECS": {
@@ -12,9 +12,9 @@
             "description": "webhookECS description",
             "vpc": {
                 "name": "WebhookVPC",
-                "maxAZs": 3,
+                "maxAZs": 2,
                 "cidr": "10.0.0.0/16",
-                "natGatewayCount": 0,
+                "natGatewayCount": 1,
                 "subnetConfiguration": [
                     {
                         "cidrMask": 24,
